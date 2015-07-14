@@ -12,7 +12,7 @@ public class Player {
 	 */
 	public Player() {
 
-		ImageIcon img = new ImageIcon("img//smiley.png");
+		ImageIcon img = new ImageIcon("res\\img\\smiley.png");
 		player = img.getImage();
 
 		tileX = 1;

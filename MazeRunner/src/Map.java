@@ -15,9 +15,9 @@ public class Map {
 	 */
 	public Map() {
 
-		ImageIcon img = new ImageIcon("img\\grass.png");
+		ImageIcon img = new ImageIcon("res\\img\\grass.png");
 		grass = img.getImage();
-		img = new ImageIcon("img\\wall.png");
+		img = new ImageIcon("res\\img\\wall.png");
 		wall = img.getImage();
 
 		openFile();
@@ -56,7 +56,7 @@ public class Map {
 	private void openFile() {
 
 		try {
-			map = new Scanner(new File("Map.txt"));
+			map = new Scanner(new File("res\\Map.txt"));
 		} catch (Exception e) {
 			System.out.println("error loading map");
 		}
