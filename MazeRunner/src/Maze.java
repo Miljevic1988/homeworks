@@ -19,10 +19,10 @@ public class Maze {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-		File sound = new File("sound//Game.WAV");
+		
+		File sound = new File("res\\sound\\Game.WAV");
 		PlaySound(sound);
 		PlaySound(sound);
-
 	}
 
 	/**
