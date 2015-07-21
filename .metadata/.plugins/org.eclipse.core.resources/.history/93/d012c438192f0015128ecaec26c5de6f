@@ -1,0 +1,100 @@
+import java.util.EmptyStackException;
+
+
+ public class UniqueStackInt {
+	
+	private Node head;
+	
+	/**
+	 * Pushes given value on stack.
+	 * @param value An integer value
+	 * @return Integer value
+	 */
+	public int push(int value){
+		if(head == null){
+			head = new Node(value);
+			return value;
+		}
+		Node tmp = head;
+		while (tmp.getNext() != null) {
+			if(tmp.getValue() == value)
+				return value;
+			tmp = tmp.getNext();
+		}
+		tmp = new Node(value);
+		tmp.setNext(head);
+		head = tmp;
+		return value;
+	}
+	
+	/**
+	 * Pops first element from stack.
+	 * @return An integer value
+	 * @throws EmptyStackException When stack is empty
+	 */
+	public int pop() throws EmptyStackException {
+		if(head == null)
+			throw new EmptyStackException();
+		int value = head.getValue();
+		head = head.getNext();
+		return value;
+	}
+	
+	/**
+	 * Returns true if values in stack are increasing.
+	 * @return True if increasing
+	 */
+	public boolean isIncreasing(){
+		if (head == null)
+			return true;
+		int tmpValue = head.getValue();
+		Node tmp = head;
+		while (tmp.getNext() != null) {
+			tmp = tmp.getNext();
+			if (tmpValue <= tmp.getValue()){
+				tmpValue = tmp.getValue();
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private class Node {
+		
+		private int value;
+		private Node next;
+		
+		public Node(int value) {
+			this.value = value;
+		}
+
+		/**
+		 * @return the next
+		 */
+		public Node getNext() {
+			return next;
+		}
+
+		/**
+		 * @param next the next to set
+		 */
+		public void setNext(Node next) {
+			this.next = next;
+		}
+
+		/**
+		 * @return the value
+		 */
+		public int getValue() {
+			return value;
+		}
+		
+		@Override
+		public String toString() {
+			if (next == null)
+				return String.valueOf(value);
+			return value + ", " + next.toString();
+		}
+	}
+}

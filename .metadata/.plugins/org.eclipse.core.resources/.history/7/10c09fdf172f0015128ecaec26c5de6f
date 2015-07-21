@@ -1,0 +1,167 @@
+import java.util.NoSuchElementException;
+
+
+public class Task1 {
+ 	public class LinkedListBoolean {
+		private Node head;
+		
+		/**
+		 * Adds given value to list.
+		 * @param value A boolean value
+		 */
+		public void add(boolean value){
+			if(head == null){
+				head = new Node(value);
+				return;
+			}
+			Node tmp = head;
+			while (tmp.getNext() != null) {
+				tmp = tmp.getNext();
+			}
+			tmp.setNext(new Node(value));
+		}
+		
+		/**
+		 * Removes given value from list.
+		 * @param value Value to be removed
+		 * @throws NoSuchElementException When list is empty or when given element does not appear in list
+		 */
+		public void remove(boolean value) throws NoSuchElementException {
+			if (head == null)
+				throw new NoSuchElementException();
+			if(head.getValue() == value){
+				head = head.getNext();
+				return;
+			}
+			Node previous = head;
+			Node tmp = head.getNext();
+			while (tmp != null) {
+				if(tmp.getValue() == value){
+					previous.setNext(tmp.getNext());
+					return;
+				}
+				previous = tmp;
+				tmp = tmp.getNext();
+			}
+			throw new NoSuchElementException();
+		}
+		
+		/**
+		 * Removes given element from list, after given index
+		 * @param value Value to be removed
+		 * @param index Index after which given value is search to be removed
+		 * @throws NoSuchElementException When given value does not appear after given index
+		 * @throws ArrayIndexOutOfBoundsException When given index is out of bounds or when list is empty
+		 */
+		public void remove(boolean value, int index) throws NoSuchElementException, ArrayIndexOutOfBoundsException {
+			if (head == null || index < 0 || index >= size())
+				throw new ArrayIndexOutOfBoundsException();
+			Node previous = head;
+			for (int i = 0; i < index; i++) {
+				previous = previous.getNext();
+			}
+			Node tmp = previous.getNext();
+			for (int i = index; i < size(); i++) {
+				if(tmp.getValue() == value){
+					previous.setNext(tmp.getNext());
+					return;
+				}
+			}
+			throw new NoSuchElementException();
+		}
+		
+		/**
+		 * Returns true if given element is in list
+		 * @param value A boolean value
+		 * @return true if appears
+		 */
+		public boolean contains(boolean value){
+			Node tmp = head;
+			for (int i = 0; i < size(); i++) {
+				if(tmp.getValue() == value)
+					return true;
+			}
+			return false;
+		}
+		
+		/**
+		 * True if elements are alternating (true, false, true, false...)
+		 * @return True if elements are alternating
+		 */
+		public boolean isAlternating(){
+			if(head == null)
+				return true;
+			Node tmp = head;
+			boolean tmpValue = head.getValue();
+			for (int i = 0; i < size(); i++) {
+				if(tmp.getValue() == tmpValue){
+					tmpValue = !tmpValue;
+				} else {
+					return false;
+				}
+				tmp = tmp.getNext();
+			}
+			return true;
+		}
+		
+		/**
+		 * Size of the list.
+		 * @return Size of the list
+		 */
+		public int size(){
+			Node tmp = head;
+			int size = 0;
+			while (tmp != null) {
+				size++;
+				tmp = tmp.getNext();
+			}
+			return size;
+		}
+		
+		@Override
+		public String toString() {
+			if(head == null){
+				return "List is empty.";
+			}
+			return head.toString();
+		}
+		
+		private class Node {
+			
+			private boolean value;
+			private Node next;
+			
+			public Node(boolean value) {
+				this.value = value;
+			}
+
+			/**
+			 * @return the next
+			 */
+			public Node getNext() {
+				return next;
+			}
+
+			/**
+			 * @param next the next to set
+			 */
+			public void setNext(Node next) {
+				this.next = next;
+			}
+
+			/**
+			 * @return the value
+			 */
+			public boolean getValue() {
+				return value;
+			}
+			
+			@Override
+			public String toString() {
+				if (next == null)
+					return String.valueOf(value);
+				return value + ", " + next.toString();
+			}
+		}
+	}
+}

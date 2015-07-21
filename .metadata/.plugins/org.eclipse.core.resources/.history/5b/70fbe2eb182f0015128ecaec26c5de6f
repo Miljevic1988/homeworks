@@ -1,0 +1,30 @@
+
+ public class Task3 {
+
+	public static void main(String[] args) {
+		
+		//Making list
+		List<Integer> list = new ArrayList<Integer>();
+		list.add(2);
+		list.add(4);
+		list.add(3);
+		list.add(5);
+		list.add(2);
+		list.add(9);
+		list.add(2);
+		System.out.println("Original list: " + list);
+		
+		//Modifying list
+		ListIterator<Integer> it = list.listIterator();
+		while (it.hasNext()) {
+			int tmp = it.next();
+			if(it.hasNext()){
+				it.remove();
+				tmp += it.next();
+				it.set(tmp);
+			}
+		}
+		System.out.println("Modified list: " + list);
+		
+	}
+}
